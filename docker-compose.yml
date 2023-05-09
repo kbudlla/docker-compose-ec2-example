@@ -8,9 +8,7 @@ services:
     depends_on:
       - mongo
     volumes:
-      - type: bind
-        source: .
-        target: /app
+      - .:/app
     command: sh -c "npm install -g npm@8 && npm i && npm start"
     ports:
       - "80:80"
