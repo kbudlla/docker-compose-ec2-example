@@ -1,0 +1,22 @@
+version: "3.1"
+services:
+  node:
+    container_name: node_1
+    image: node:16.3.0-alpine
+    working_dir: /app
+    restart: always
+    depends_on:
+      - mongo
+    volumes:
+      - type: bind
+        source: .
+        target: /app
+    command: sh -c "npm install -g npm@8 && npm i && npm start"
+    ports:
+      - "80:80"
+  mongo:
+    container_name: mongo_1
+    image: mongo
+    volumes:
+      - ./data:/data/db
+    command: mongod --dbpath=/data/db
